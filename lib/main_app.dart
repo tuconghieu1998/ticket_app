@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ticket_app/app_color.dart';
 import 'package:ticket_app/asset_const.dart';
+import 'package:ticket_app/home/screens/home_screen.dart';
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
@@ -13,10 +16,7 @@ class _MainAppState extends State<MainApp> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
+    HomeScreen(),
     Text(
       'Index 1: Wallet',
       style: optionStyle,
@@ -40,25 +40,27 @@ class _MainAppState extends State<MainApp> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(AppIcons.iconHome)),
-            activeIcon: ImageIcon(AssetImage(AppIcons.iconHomeActive)),
+            icon: SvgPicture.asset(AppIcons.iconHome),
+            activeIcon: SvgPicture.asset(AppIcons.iconHomeActive),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(AppIcons.iconWallet)),
-            activeIcon: ImageIcon(AssetImage(AppIcons.iconWalletActive)),
+            icon: SvgPicture.asset(AppIcons.iconWallet),
+            activeIcon: SvgPicture.asset(AppIcons.iconWalletActive),
             label: 'Wallet',
           ),
           BottomNavigationBarItem(
-            icon: ImageIcon(AssetImage(AppIcons.iconTicket)),
-            activeIcon: ImageIcon(AssetImage(AppIcons.iconTicketActive)),
+            icon: SvgPicture.asset(AppIcons.iconTicket),
+            activeIcon: SvgPicture.asset(AppIcons.iconTicketActive),
             label: 'My Ticket',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.white,
+        unselectedItemColor: AppColor.unselectedItemColor,
+        backgroundColor: const Color(0xff051138),
         onTap: _onItemTapped,
       ),
     );

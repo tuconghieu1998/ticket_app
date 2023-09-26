@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ticket_app/app_color.dart';
 import 'package:ticket_app/main_app.dart';
 
 void main() {
@@ -14,7 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        textTheme: Theme.of(context)
+            .textTheme
+            .apply(bodyColor: Colors.white, displayColor: Colors.white),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.deepPurple, background: AppColor.backgroundColor),
         useMaterial3: true,
       ),
       home: const MainApp(),
