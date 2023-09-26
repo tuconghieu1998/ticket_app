@@ -3,8 +3,10 @@
 A new Flutter project.
 
 # Screen shots
-<img src="![1](https://github.com/tuconghieu1998/ticket_app/assets/43313480/284f6c3c-5fe5-4beb-a4a1-3e1bc5f8c0b0)" alt="drawing" width="200"/>
-![2](https://github.com/tuconghieu1998/ticket_app/assets/43313480/0ce40b44-5c8e-48f8-86f5-805c5269c8fe)
+![1](https://github.com/tuconghieu1998/ticket_app/assets/43313480/c1a3a90d-91aa-4813-8335-2386a7edfeb2) ![2](https://github.com/tuconghieu1998/ticket_app/assets/43313480/29709771-9281-4e71-ab1e-10cf347e79ee)
+
+
+
 
 
 
