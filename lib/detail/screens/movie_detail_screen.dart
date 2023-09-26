@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ticket_app/asset_const.dart';
+import 'package:ticket_app/common/widgets/author_widget.dart';
+import 'package:ticket_app/detail/widgets/movie_trailer_video_widget.dart';
 
 class MovieDetailScreen extends StatefulWidget {
   const MovieDetailScreen({super.key});
@@ -10,16 +12,54 @@ class MovieDetailScreen extends StatefulWidget {
   State<MovieDetailScreen> createState() => _MovieDetailScreenState();
 }
 
-class _MovieDetailScreenState extends State<MovieDetailScreen> {
+class _MovieDetailScreenState extends State<MovieDetailScreen>
+    with TickerProviderStateMixin {
+  late final TabController _tabController;
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            children: [_headerSection()],
-          )),
-    );
+        body: Column(
+      children: [
+        _headerSection(),
+        const SizedBox(
+          height: 20,
+        ),
+        TabBar(
+          labelColor: Colors.white,
+          indicatorColor: Colors.white,
+          labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          unselectedLabelColor: Colors.white.withOpacity(0.7),
+          unselectedLabelStyle:
+              TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+          controller: _tabController,
+          tabs: const <Widget>[
+            Tab(
+              text: "About Movie",
+            ),
+            Tab(
+              text: "Review",
+            ),
+          ],
+        ),
+        Expanded(
+          child: TabBarView(
+            controller: _tabController,
+            children: <Widget>[
+              _aboutMovieTab(),
+              Center(
+                child: Text("It's rainy here"),
+              )
+            ],
+          ),
+        ),
+      ],
+    ));
   }
 
   Widget _headerSection() {
@@ -150,5 +190,102 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
         ],
       ),
     );
+  }
+
+  Widget _aboutMovieTab() {
+    return SingleChildScrollView(
+        child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 24),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Text(
+            "Synopsis",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Text(
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+              "Wreck-It Ralph wants to be loved by many people like his kind friend, Fix-It Felix. But no one likes evil characters like Ralph. "),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: Text(
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+              "Ralph's goal was simple, wanting to win and get a medal to be considered a hero. But without realizing Ralph instead paved the way for criminals who can kill all the games in the game complex."),
+        ),
+        const SizedBox(height: 24),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Text(
+            "Cast & Crew",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
+        ),
+        const SizedBox(height: 16),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24),
+            child: Row(
+              children: [
+                AuthorWidget(),
+                const SizedBox(
+                  width: 24,
+                ),
+                AuthorWidget(),
+                const SizedBox(
+                  width: 24,
+                ),
+                AuthorWidget(),
+                const SizedBox(
+                  width: 24,
+                ),
+                AuthorWidget(),
+                const SizedBox(
+                  width: 24,
+                ),
+                AuthorWidget(),
+                const SizedBox(
+                  width: 24,
+                ),
+                AuthorWidget(),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.0),
+          child: Text(
+            "Trailer and song",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
+        ),
+        const SizedBox(height: 16),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
+              children: [
+                MovieTrailerVideoWidget(
+                    imgBackground: AppImages.imgMovieTrailer1),
+                const SizedBox(
+                  width: 10,
+                ),
+                MovieTrailerVideoWidget(
+                    imgBackground: AppImages.imgMovieTrailer2),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+      ],
+    ));
   }
 }

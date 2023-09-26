@@ -18,4 +18,6 @@ class AppImages {
   static const String imgVerticalMoviePoster =
       "assets/images/vertical_movie_poster.png";
   static const String imgMovieBanner = "assets/images/movie_banner.png";
+  static const String imgMovieTrailer1 = "assets/images/movie_trailer_1.png";
+  static const String imgMovieTrailer2 = "assets/images/movie_trailer_2.png";
 }
