@@ -177,23 +177,28 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
           Positioned(
               top: 50,
               left: 25,
-              child: Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18),
-                      color: Colors.black.withOpacity(0.4)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset(AppIcons.iconBack),
-                  )))
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: Colors.black.withOpacity(0.4)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset(AppIcons.iconBack),
+                    )),
+              ))
         ],
       ),
     );
   }
 
   Widget _aboutMovieTab() {
-    return SingleChildScrollView(
+    return const SingleChildScrollView(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
