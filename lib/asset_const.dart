@@ -9,6 +9,7 @@ class AppIcons {
       "assets/icons/svg/ticket_active_icon.svg";
   static const String iconControl = "assets/icons/svg/control_icon.svg";
   static const String iconSearch = "assets/icons/svg/search_icon.svg";
+  static const String iconBack = "assets/icons/svg/back_icon.svg";
 }
 
 class AppImages {
@@ -16,4 +17,5 @@ class AppImages {
   static const String imgMoviePoster = "assets/images/movie_poster.png";
   static const String imgVerticalMoviePoster =
       "assets/images/vertical_movie_poster.png";
+  static const String imgMovieBanner = "assets/images/movie_banner.png";
 }

@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ticket_app/app_color.dart';
 import 'package:ticket_app/asset_const.dart';
 import 'package:ticket_app/common/widgets/avatar_widget.dart';
+import 'package:ticket_app/detail/screens/movie_detail_screen.dart';
 import 'package:ticket_app/home/widgets/category_tag_widget.dart';
 import 'package:ticket_app/home/widgets/playing_now_movie_item_widget.dart';
 import 'package:ticket_app/home/widgets/vertical_movie_widget.dart';
@@ -185,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _comingSoonSection() {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
@@ -208,21 +209,27 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
-                VerticalMovieWidget(),
+                VerticalMovieWidget(
+                  onPress: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                      return MovieDetailScreen();
+                    }));
+                  },
+                ),
                 const SizedBox(
-                  width: 12,
+                  width: 15,
                 ),
                 VerticalMovieWidget(),
                 const SizedBox(
-                  width: 12,
+                  width: 15,
                 ),
                 VerticalMovieWidget(),
                 const SizedBox(
-                  width: 12,
+                  width: 15,
                 ),
                 VerticalMovieWidget(),
                 const SizedBox(
-                  width: 12,
+                  width: 15,
                 ),
                 VerticalMovieWidget(),
               ],
