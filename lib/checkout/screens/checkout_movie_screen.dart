@@ -19,8 +19,8 @@ class _CheckoutMovieScreenState extends State<CheckoutMovieScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 15),
               child: Row(
                 children: [
                   BackButton(
@@ -58,7 +58,7 @@ class _CheckoutMovieScreenState extends State<CheckoutMovieScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           "Ralph Breaks the Internet",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500),
@@ -76,8 +76,8 @@ class _CheckoutMovieScreenState extends State<CheckoutMovieScreen> {
                                 allowHalfRating: true,
                                 itemCount: 5,
                                 itemPadding:
-                                    EdgeInsets.symmetric(horizontal: 2.0),
-                                itemBuilder: (context, _) => Icon(
+                                    const EdgeInsets.symmetric(horizontal: 2.0),
+                                itemBuilder: (context, _) => const Icon(
                                   Icons.star,
                                   color: Colors.amber,
                                 ),
@@ -85,7 +85,7 @@ class _CheckoutMovieScreenState extends State<CheckoutMovieScreen> {
                                   print(rating);
                                 },
                               ),
-                              Text(
+                              const Text(
                                 "(4.7)",
                                 style: TextStyle(fontSize: 10),
                               )
@@ -119,10 +119,10 @@ class _CheckoutMovieScreenState extends State<CheckoutMovieScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
               child: Container(
                 height: 1,
-                decoration: BoxDecoration(color: Color(0xffDBDBDB)),
+                decoration: const BoxDecoration(color: Color(0xffDBDBDB)),
               ),
             ),
             Padding(
@@ -217,7 +217,7 @@ class _CheckoutMovieScreenState extends State<CheckoutMovieScreen> {
                   Text("Total",
                       style: AppStyle.textStyleCheckout
                           .copyWith(color: Colors.white.withOpacity(0.8))),
-                  Text(
+                  const Text(
                     "Rp 150.000",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   )
@@ -225,10 +225,10 @@ class _CheckoutMovieScreenState extends State<CheckoutMovieScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 30),
               child: Container(
                 height: 1,
-                decoration: BoxDecoration(color: Color(0xffDBDBDB)),
+                decoration: const BoxDecoration(color: Color(0xffDBDBDB)),
               ),
             ),
             Padding(
@@ -239,7 +239,7 @@ class _CheckoutMovieScreenState extends State<CheckoutMovieScreen> {
                   Text("Your Wallet",
                       style: AppStyle.textStyleCheckout
                           .copyWith(color: Colors.white.withOpacity(0.8))),
-                  Text(
+                  const Text(
                     "IDR 200.000",
                     style: TextStyle(
                         fontSize: 16,
@@ -249,10 +249,10 @@ class _CheckoutMovieScreenState extends State<CheckoutMovieScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            MainButton(width: 255, height: 61, textButton: "Checkout")
+            const MainButton(width: 255, height: 61, textButton: "Checkout")
           ],
         ),
       ),
