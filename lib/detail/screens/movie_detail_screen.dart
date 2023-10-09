@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ticket_app/asset_const.dart';
+import 'package:ticket_app/checkout/screens/checkout_movie_screen.dart';
 import 'package:ticket_app/common/widgets/author_widget.dart';
+import 'package:ticket_app/common/widgets/main_button.dart';
 import 'package:ticket_app/detail/widgets/movie_trailer_video_widget.dart';
 
 class MovieDetailScreen extends StatefulWidget {
@@ -166,7 +168,16 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                             color: Colors.white.withOpacity(0.7)),
                       ),
                       const SizedBox(
-                        height: 5,
+                        height: 15,
+                      ),
+                      MainButton(
+                        textButton: "Book Ticket",
+                        onPress: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(builder: (_) {
+                            return CheckoutMovieScreen();
+                          }));
+                        },
                       )
                     ],
                   )
