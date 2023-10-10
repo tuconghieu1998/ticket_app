@@ -4,6 +4,7 @@ import 'package:ticket_app/app_color.dart';
 import 'package:ticket_app/asset_const.dart';
 import 'package:ticket_app/home/screens/home_screen.dart';
 import 'package:ticket_app/tickets/screens/my_ticket_screen.dart';
+import 'package:ticket_app/wallets/screens/wallet_screen.dart';
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
@@ -18,10 +19,7 @@ class _MainAppState extends State<MainApp> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    Text(
-      'Index 1: Wallet',
-      style: optionStyle,
-    ),
+    WalletScreen(),
     MyTicketScreen()
   ];
 
