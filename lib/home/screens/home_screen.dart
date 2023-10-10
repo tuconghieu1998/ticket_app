@@ -209,13 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
-                VerticalMovieWidget(
-                  onPress: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                      return MovieDetailScreen();
-                    }));
-                  },
-                ),
+                VerticalMovieWidget(),
                 const SizedBox(
                   width: 15,
                 ),
