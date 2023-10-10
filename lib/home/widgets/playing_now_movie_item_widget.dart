@@ -15,12 +15,11 @@ class PlayingNowMovieItemWidget extends StatelessWidget {
         }));
       },
       child: Container(
-        width: 300,
-        height: 200,
+        width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             image: const DecorationImage(
               image: AssetImage(AppImages.imgMoviePoster),
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(14)),
         child: Stack(children: [

@@ -1,9 +1,9 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ticket_app/app_color.dart';
 import 'package:ticket_app/asset_const.dart';
 import 'package:ticket_app/common/widgets/avatar_widget.dart';
-import 'package:ticket_app/detail/screens/movie_detail_screen.dart';
 import 'package:ticket_app/home/widgets/category_tag_widget.dart';
 import 'package:ticket_app/home/widgets/playing_now_movie_item_widget.dart';
 import 'package:ticket_app/home/widgets/vertical_movie_widget.dart';
@@ -145,11 +145,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _playingNowSection() {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
           child: Row(children: [
             Expanded(
               child: Text(
@@ -162,35 +161,24 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(
           height: 24,
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              children: [
-                PlayingNowMovieItemWidget(),
-                const SizedBox(
-                  width: 8,
-                ),
-                PlayingNowMovieItemWidget(),
-                const SizedBox(
-                  width: 8,
-                ),
-                PlayingNowMovieItemWidget(),
-              ],
-            ),
-          ),
-        )
+        CarouselSlider(
+          options: CarouselOptions(autoPlay: true, enlargeCenterPage: true),
+          items: const [
+            PlayingNowMovieItemWidget(),
+            PlayingNowMovieItemWidget(),
+            PlayingNowMovieItemWidget(),
+          ],
+        ),
       ],
     );
   }
 
   Widget _comingSoonSection() {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: 24),
           child: Row(children: [
             Expanded(
               child: Text(
@@ -200,29 +188,29 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ]),
         ),
-        const SizedBox(
+        SizedBox(
           height: 24,
         ),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
                 VerticalMovieWidget(),
-                const SizedBox(
+                SizedBox(
                   width: 15,
                 ),
                 VerticalMovieWidget(),
-                const SizedBox(
+                SizedBox(
                   width: 15,
                 ),
                 VerticalMovieWidget(),
-                const SizedBox(
+                SizedBox(
                   width: 15,
                 ),
                 VerticalMovieWidget(),
-                const SizedBox(
+                SizedBox(
                   width: 15,
                 ),
                 VerticalMovieWidget(),
