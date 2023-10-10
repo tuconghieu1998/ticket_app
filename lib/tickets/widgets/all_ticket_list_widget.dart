@@ -8,20 +8,18 @@ class AllTicketListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Expanded(
-        child: SingleChildScrollView(
-            child: Column(
-          children: [
-            TicketItemWidget(),
-            TicketItemWidget(),
-            TicketItemWidget(),
-            TicketItemWidget(),
-            TicketItemWidget(),
-            TicketItemWidget(),
-            TicketItemWidget(),
-          ],
-        )),
-      ),
+      child: SingleChildScrollView(
+          child: Column(
+        children: [
+          TicketItemWidget(),
+          TicketItemWidget(),
+          TicketItemWidget(),
+          TicketItemWidget(),
+          TicketItemWidget(),
+          TicketItemWidget(),
+          TicketItemWidget(),
+        ],
+      )),
     );
   }
 }
