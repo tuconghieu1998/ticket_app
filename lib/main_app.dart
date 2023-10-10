@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ticket_app/app_color.dart';
 import 'package:ticket_app/asset_const.dart';
 import 'package:ticket_app/home/screens/home_screen.dart';
+import 'package:ticket_app/tickets/screens/my_ticket_screen.dart';
 
 class MainApp extends StatefulWidget {
   const MainApp({super.key});
@@ -21,10 +22,7 @@ class _MainAppState extends State<MainApp> {
       'Index 1: Wallet',
       style: optionStyle,
     ),
-    Text(
-      'Index 2: My Ticket',
-      style: optionStyle,
-    ),
+    MyTicketScreen()
   ];
 
   void _onItemTapped(int index) {
