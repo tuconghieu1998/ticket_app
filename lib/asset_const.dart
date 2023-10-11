@@ -21,4 +21,9 @@ class AppImages {
   static const String imgMovieTrailer1 = "assets/images/movie_trailer_1.png";
   static const String imgMovieTrailer2 = "assets/images/movie_trailer_2.png";
   static const String imgWalletCard = "assets/images/wallet_card.png";
+  static const String imgAvatar1 = "assets/images/avatar_1.png";
+  static const String imgAvatar2 = "assets/images/avatar_2.png";
+  static const String imgAvatar3 = "assets/images/avatar_3.png";
+  static const String imgAvatar4 = "assets/images/avatar_4.png";
+  static const String imgAvatar5 = "assets/images/avatar_5.png";
 }

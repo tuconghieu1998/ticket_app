@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ticket_app/app_color.dart';
 import 'package:ticket_app/asset_const.dart';
+import 'package:ticket_app/common/models/movie_model.dart';
 import 'package:ticket_app/common/widgets/avatar_widget.dart';
 import 'package:ticket_app/home/widgets/category_tag_widget.dart';
 import 'package:ticket_app/home/widgets/playing_now_movie_item_widget.dart';
 import 'package:ticket_app/home/widgets/vertical_movie_widget.dart';
+import 'package:ticket_app/repository/network.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,6 +26,28 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   int categoryActiveId = 0;
+  List<MovieModel> listMoviesPlayingNow = [];
+  List<MovieModel> listMoviesUpcoming = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  loadData() async {
+    var movies = await getListMoviesPlayingNow();
+    setState(() {
+      // get 5 movies playing now
+      listMoviesPlayingNow = movies.take(5).toList();
+    });
+
+    var moviesUpComing = await getListMoviesPlayingNow();
+    setState(() {
+      // get 5 movies playing now
+      listMoviesUpcoming = moviesUpComing.take(20).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,19 +186,18 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 24,
         ),
         CarouselSlider(
-          options: CarouselOptions(autoPlay: true, enlargeCenterPage: true),
-          items: const [
-            PlayingNowMovieItemWidget(),
-            PlayingNowMovieItemWidget(),
-            PlayingNowMovieItemWidget(),
-          ],
+          options: CarouselOptions(
+              height: 220, autoPlay: true, enlargeCenterPage: true),
+          items: listMoviesPlayingNow
+              .map((movie) => PlayingNowMovieItemWidget(model: movie))
+              .toList(),
         ),
       ],
     );
   }
 
   Widget _comingSoonSection() {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
@@ -191,33 +214,24 @@ class _HomeScreenState extends State<HomeScreen> {
         SizedBox(
           height: 24,
         ),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
-            child: Row(
-              children: [
-                VerticalMovieWidget(),
-                SizedBox(
-                  width: 15,
-                ),
-                VerticalMovieWidget(),
-                SizedBox(
-                  width: 15,
-                ),
-                VerticalMovieWidget(),
-                SizedBox(
-                  width: 15,
-                ),
-                VerticalMovieWidget(),
-                SizedBox(
-                  width: 15,
-                ),
-                VerticalMovieWidget(),
-              ],
-            ),
-          ),
-        )
+        SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 160,
+          child: ListView.builder(
+              padding: EdgeInsets.only(left: 24, right: 12),
+              scrollDirection: Axis.horizontal,
+              itemCount: listMoviesUpcoming.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 12),
+                  child: VerticalMovieWidget(
+                      movieModel: listMoviesUpcoming[index]),
+                );
+              }),
+        ),
+        const SizedBox(
+          height: 24,
+        ),
       ],
     );
   }

@@ -1,33 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:ticket_app/asset_const.dart';
+import 'package:ticket_app/common/models/movie_model.dart';
+import 'package:ticket_app/core/helpers/image_helper.dart';
 import 'package:ticket_app/detail/screens/movie_detail_screen.dart';
+import 'package:ticket_app/repository/network.dart';
 
 class PlayingNowMovieItemWidget extends StatelessWidget {
-  const PlayingNowMovieItemWidget({super.key});
+  const PlayingNowMovieItemWidget({super.key, this.model});
+
+  final MovieModel? model;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-          return MovieDetailScreen();
-        }));
+      onTap: () async {
+        if (model?.id != null) {
+          var movieDetail = await getMovieDetail(model!.id ?? 0);
+          Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+            return MovieDetailScreen(detail: movieDetail);
+          }));
+        }
       },
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            image: const DecorationImage(
-              image: AssetImage(AppImages.imgMoviePoster),
-              fit: BoxFit.cover,
-            ),
-            borderRadius: BorderRadius.circular(14)),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(14),
         child: Stack(children: [
           Positioned(
-            bottom: 0,
+            top: 0,
+            left: 0,
+            child: ImageHelper.loadFromUrl(
+                ImageHelper.getImgUrl(model?.backdropPath ?? ""),
+                fit: BoxFit.cover,
+                width: 350,
+                height: 220),
+          ),
+          Positioned(
+            bottom: -1,
             child: Container(
               height: 80,
-              width: 300,
+              width: 350,
               decoration: BoxDecoration(
                   gradient: LinearGradient(
                       begin: Alignment.bottomCenter,
@@ -45,7 +56,7 @@ class PlayingNowMovieItemWidget extends StatelessWidget {
             bottom: 0,
             child: Container(
               height: 80,
-              width: 300,
+              width: 320,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(14),
@@ -59,7 +70,7 @@ class PlayingNowMovieItemWidget extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Text(
-                          "Wreck It Ralph 2",
+                          model?.title ?? "",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w600),
                         ),
@@ -72,7 +83,7 @@ class PlayingNowMovieItemWidget extends StatelessWidget {
                           RatingBar.builder(
                             ignoreGestures: true,
                             itemSize: 18,
-                            initialRating: 4.5,
+                            initialRating: (model?.voteAverage ?? 0) / 2,
                             minRating: 1,
                             direction: Axis.horizontal,
                             allowHalfRating: true,
@@ -87,7 +98,7 @@ class PlayingNowMovieItemWidget extends StatelessWidget {
                             },
                           ),
                           Text(
-                            "(4.7)",
+                            "(${(model?.voteAverage ?? 0) / 2})",
                             style: TextStyle(fontSize: 12),
                           )
                         ],

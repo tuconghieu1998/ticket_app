@@ -3,12 +3,17 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:ticket_app/asset_const.dart';
 import 'package:ticket_app/checkout/screens/checkout_movie_screen.dart';
+import 'package:ticket_app/common/models/movie_detail_model.dart';
 import 'package:ticket_app/common/widgets/author_widget.dart';
 import 'package:ticket_app/common/widgets/main_button.dart';
+import 'package:ticket_app/core/helpers/image_helper.dart';
+import 'package:ticket_app/core/helpers/utils.dart';
 import 'package:ticket_app/detail/widgets/movie_trailer_video_widget.dart';
 
 class MovieDetailScreen extends StatefulWidget {
-  const MovieDetailScreen({super.key});
+  const MovieDetailScreen({super.key, this.detail});
+
+  final MovieDetailModel? detail;
 
   @override
   State<MovieDetailScreen> createState() => _MovieDetailScreenState();
@@ -17,6 +22,7 @@ class MovieDetailScreen extends StatefulWidget {
 class _MovieDetailScreenState extends State<MovieDetailScreen>
     with TickerProviderStateMixin {
   late final TabController _tabController;
+
   @override
   void initState() {
     super.initState();
@@ -70,16 +76,12 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
       height: 360,
       child: Stack(
         children: [
-          Container(
-            width: double.infinity,
-            height: 221,
-            decoration: BoxDecoration(
-                image: const DecorationImage(
-                  image: AssetImage(AppImages.imgMovieBanner),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.circular(8)),
-          ),
+          ImageHelper.loadFromUrl(
+              ImageHelper.getImgUrl(widget.detail?.backdropPath ?? ""),
+              fit: BoxFit.cover,
+              radius: BorderRadius.circular(8),
+              width: double.infinity,
+              height: 221),
           Container(
             width: double.infinity,
             height: 221,
@@ -100,16 +102,13 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Container(
-                    width: 120,
-                    height: 172,
-                    decoration: BoxDecoration(
-                        image: const DecorationImage(
-                          image: AssetImage(AppImages.imgVerticalMoviePoster),
-                          fit: BoxFit.contain,
-                        ),
-                        borderRadius: BorderRadius.circular(8)),
-                  ),
+                  ImageHelper.loadFromUrl(
+                      ImageHelper.getImgUrl(widget.detail?.posterPath ?? "",
+                          imgSize: "w300"),
+                      fit: BoxFit.cover,
+                      radius: BorderRadius.circular(8),
+                      width: 120,
+                      height: 172),
                   const SizedBox(
                     width: 15,
                   ),
@@ -117,7 +116,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Ralph Breaks the Internet",
+                        "${widget.detail?.title}",
                         style: TextStyle(
                             fontSize: 16, fontWeight: FontWeight.w600),
                       ),
@@ -128,7 +127,8 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                             RatingBar.builder(
                               ignoreGestures: true,
                               itemSize: 16,
-                              initialRating: 4.5,
+                              initialRating:
+                                  (widget.detail?.voteAverage ?? 0) / 2,
                               minRating: 1,
                               direction: Axis.horizontal,
                               allowHalfRating: true,
@@ -144,14 +144,15 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                               },
                             ),
                             Text(
-                              "(4.7)",
+                              "(${((widget.detail?.voteAverage ?? 0) / 2).toStringAsFixed(1)})",
                               style: TextStyle(fontSize: 10),
                             )
                           ],
                         ),
                       ),
                       Text(
-                        "Action & adventure, Comedy",
+                        widget.detail?.genres?.map((e) => e.name).join(", ") ??
+                            "",
                         style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -161,7 +162,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
                         height: 5,
                       ),
                       Text(
-                        "1h 41min",
+                        Utils.convertRunTime(widget.detail?.runtime ?? 0),
                         style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
@@ -209,7 +210,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
   }
 
   Widget _aboutMovieTab() {
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -226,13 +227,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
           padding: EdgeInsets.symmetric(horizontal: 24),
           child: Text(
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-              "Wreck-It Ralph wants to be loved by many people like his kind friend, Fix-It Felix. But no one likes evil characters like Ralph. "),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: Text(
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-              "Ralph's goal was simple, wanting to win and get a medal to be considered a hero. But without realizing Ralph instead paved the way for criminals who can kill all the games in the game complex."),
+              widget.detail?.overview ?? ""),
         ),
         const SizedBox(height: 24),
         Padding(
@@ -249,27 +244,38 @@ class _MovieDetailScreenState extends State<MovieDetailScreen>
             padding: EdgeInsets.symmetric(horizontal: 24),
             child: Row(
               children: [
-                AuthorWidget(),
+                AuthorWidget(
+                  name: "John C. Reily",
+                  avatar: AppImages.imgAvatar3,
+                ),
                 const SizedBox(
                   width: 24,
                 ),
-                AuthorWidget(),
+                AuthorWidget(
+                  name: "Sarah Silverman",
+                  avatar: AppImages.imgAvatar4,
+                ),
                 const SizedBox(
                   width: 24,
                 ),
-                AuthorWidget(),
+                AuthorWidget(
+                  name: "Jack McBrayer",
+                  avatar: AppImages.imgAvatar2,
+                ),
                 const SizedBox(
                   width: 24,
                 ),
-                AuthorWidget(),
+                AuthorWidget(
+                  name: "Taraji P. Henson",
+                  avatar: AppImages.imgAvatar5,
+                ),
                 const SizedBox(
                   width: 24,
                 ),
-                AuthorWidget(),
-                const SizedBox(
-                  width: 24,
+                AuthorWidget(
+                  name: "Gal Gadot",
+                  avatar: AppImages.imgAvatar1,
                 ),
-                AuthorWidget(),
               ],
             ),
           ),
